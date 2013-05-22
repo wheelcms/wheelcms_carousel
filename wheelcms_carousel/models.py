@@ -19,6 +19,6 @@ def frontpage_context(handler, request, node):
                )
 
 
-template_registry.register(PageType, "wheelsite_site/page_frontpage_view.html",
-                           "Frontpage view", context=frontpage_context)
+template_registry.register(PageType, "wheelcms_carousel/page_carousel_view.html",
+                           "Carousel view", context=frontpage_context)
 
