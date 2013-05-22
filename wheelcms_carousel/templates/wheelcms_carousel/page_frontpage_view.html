@@ -1,0 +1,67 @@
+{% extends "wheelcms_axle/base.html" %}
+
+{% block breadcrumb %}{%endblock %}
+
+{% block base_main %}
+<div class="row">
+  <div class="span12">
+    <div class="welcome">
+      <h3>{{content.title}}</h3>
+      <p>{{content.body|safe}}</p>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="span12">
+    <div id="myCarousel" class="carousel slide frame">
+      {% if bootstrap2_3 %}
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+      </ol>
+      {% endif %}
+      <!-- Carousel items -->
+      <div class="carousel-inner">
+        {% for c in carousel %}
+        <div class="{% if forloop.first %}active{% endif %} item">
+          <img src="{{c.path}}/+download">
+          <div class="carousel-caption">
+             <h4>{{c.content.title}}</h4>
+             <p>
+             {{c.content.caption|default:c.content.description}}
+             </p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <!-- Carousel nav -->
+      <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+      <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+    </div>
+    <div class="frame-shadow"></div>
+  </div>
+</div>
+
+<div class="row slots">
+  <div class="span4 pagination-centered">
+    <div class="well">
+      <h5>{{slots.0.content.title}}</h5>
+      {{slots.0.content.body|safe}}
+    </div>
+  </div>
+  <div class="span4">
+    <div class="well">
+      <h5>{{slots.1.content.title}}</h5>
+      {{slots.1.content.body|safe}}
+    </div>
+  </div>
+  <div class="span4">
+    <div class="well">
+      <h5>{{slots.2.content.title}}</h5>
+      {{slots.2.content.body|safe}}
+    </div>
+  </div>
+</div>
+
+{% endblock %}
