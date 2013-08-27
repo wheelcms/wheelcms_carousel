@@ -4,20 +4,24 @@ from wheelcms_axle.content import ImageContent
 
 def frontpage_context(handler, request, node):
     ## limit to images, visible
-    datanode = node.child('data')
+
+    language = handler.active_language()
+    datanode = node.child('data', language=language)
     if datanode is None:
         return dict(carousel=[])
 
-    return dict(carousel=[n for n in node.child('data').children()
-                          if isinstance(n.content(), ImageContent)
-                          and n.content().spoke().workflow().is_visible()
-                         ],
-                slots=[s for s in node.child('data').children()
-                          if isinstance(s.content(), Page)
-                          and s.content().spoke().workflow().is_visible()
-                         ],
-               )
+    images = []
+    pages = []
 
+    for n in datanode.children():
+        content = n.content()
+        if isinstance(content, ImageContent) and content.spoke().workflow().is_visible():
+            images.append(n)
+        if isinstance(content, Page) and content.spoke().workflow().is_visible():
+            pages.append(n)
+
+
+    return dict(carousel=images, slots=pages)
 
 template_registry.register(PageType, "wheelcms_carousel/page_carousel_view.html",
                            "Carousel view", context=frontpage_context)
