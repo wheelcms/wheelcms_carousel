@@ -25,7 +25,7 @@
       <div class="carousel-inner">
         {% for c in carousel %}
         <div class="{% if forloop.first %}active{% endif %} item">
-          <img src="{{c.get_absolute_url}}+download">
+          <img src="{{c.get_absolute_url}}+download/">
           <div class="carousel-caption">
              <h4>{{c.content.title}}</h4>
              <p>
