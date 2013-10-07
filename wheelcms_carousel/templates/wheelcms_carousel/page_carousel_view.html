@@ -1,14 +1,16 @@
 {% extends "wheelcms_axle/base.html" %}
 {% load fragments %}
+{% load staticfiles %}
 
 {% block fragments %}
   {{block.super}}
   {% fragment "javascript" %}
-    <script type="text/javscript">
-    alert("hi");
-    dfa-s0asdl;f,;'
-    console.log("x");
+    <script type="text/javascript">
+      $(".carousel").carousel();
     </script>
+  {% endfragment %}
+  {% fragment "base_stylesheets" %}
+   <link rel="stylesheet" href="{% static "css/wheelcms_carousel.css" %}" media="screen, projection, print"/>
   {% endfragment %}
 {% endblock %}
 {% block breadcrumb %}{%endblock %}
@@ -25,11 +27,13 @@
 <div class="row">
   <div class="col-lg-12">
     <div id="myCarousel" class="carousel slide frame">
+      {% if carousel|length > 1 %}
       <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
+        {% for c in carousel %}
+        <li data-target="#myCarousel" data-slide-to="0" {% if forloop.first %}class="active" {% endif %}></li>
+        {% endfor %}
       </ol>
+      {% endif %}
       <!-- Carousel items -->
       <div class="carousel-inner">
         {% for c in carousel %}
@@ -55,19 +59,19 @@
 <div class="row slots">
   <div class="col-lg-4 pagination-centered">
     <div class="well">
-      <h5>{{slots.0.content.title}}</h5>
+      <h4>{{slots.0.content.title}}</h4>
       {{slots.0.content.body|safe}}
     </div>
   </div>
   <div class="col-lg-4">
     <div class="well">
-      <h5>{{slots.1.content.title}}</h5>
+      <h4>{{slots.1.content.title}}</h4>
       {{slots.1.content.body|safe}}
     </div>
   </div>
   <div class="col-lg-4">
     <div class="well">
-      <h5>{{slots.2.content.title}}</h5>
+      <h4>{{slots.2.content.title}}</h4>
       {{slots.2.content.body|safe}}
     </div>
   </div>
