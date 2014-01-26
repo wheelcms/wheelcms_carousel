@@ -1,17 +1,17 @@
 {% extends "wheelcms_axle/base.html" %}
-{% load fragments %}
+{% load granules %}
 {% load staticfiles %}
 
-{% block fragments %}
+{% block granules %}
   {{block.super}}
-  {% fragment "javascript" %}
+  {% granule "javascript" %}
     <script type="text/javascript">
       $(".carousel").carousel();
     </script>
-  {% endfragment %}
-  {% fragment "base_stylesheets" %}
+  {% endgranule %}
+  {% granule "base_stylesheets" %}
    <link rel="stylesheet" href="{% static "css/wheelcms_carousel.css" %}" media="screen, projection, print"/>
-  {% endfragment %}
+  {% endgranule %}
 {% endblock %}
 {% block breadcrumb %}{%endblock %}
 
